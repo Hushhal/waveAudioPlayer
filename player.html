@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wave AudioPlayer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+</head>
+<body>
+    <div class="WaveAudioPlayer">
+        <div class="WaveAudioPlayerContainer">
+            <div class="CoverContainer">
+                <img src="media/mercy.jpg" alt="Газвание альбома" class="CoverContainerImg">
+            </div>
+            <div class="TrackInfo">
+                <h1 class="TrackInfoH1">Название альбома</h1>
+                <p class="TrackInfoP">Исполнитель</p>
+                <div id="waveform"></div>
+                <div class="TrackControls">
+                    <img src="media/play.png" class="TrackControlsIco" id="playBtn">
+                    <img src="media/stop.png" class="TrackControlsIco" id="stopBtn">
+                    <img src="media/volume.png" class="TrackControlsIco" id="volumeBtn">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+   var playBtn = document.getElementById("playBtn");
+   var stopBtn = document.getElementById("stopBtn");
+   var volumeBtn = document.getElementById("volumeBtn");
+
+    var wavesurfer = WaveSurfer.create({
+    container: '#waveform',
+    waveColor: '#fff',
+    progressColor: '#d897ff',
+    responsive: true,
+    hideScrollbar: true,
+
+    });
+    wavesurfer.load('media/mercy-badshah.mp3');
+
+    playBtn.onclick = function(){
+        wavesurfer.playPause();
+        if(playBtn.src.includes("play.png")){
+            playBtn.src = "media/pause.png";
+        }
+        else {
+            playBtn.src = "media/play.png";         
+        }
+    }
+
+    stopBtn.onclick = function(){
+        wavesurfer.stop();
+        playBtn.src = "media/play.png";  
+    }
+
+    volumeBtn.onclick = function(){
+        wavesurfer.toggleMute();
+        if(volumeBtn.src.includes("volume.png")){
+            volumeBtn.src = "media/mute.png";
+        }
+        else {
+            volumeBtn.src = "media/volume.png";         
+        }
+    }
+
+</script>
+    
+</body>
+</html>
